@@ -56,17 +56,69 @@
             <div class="row row-cols-1 row-cols-lg-2">
                 <div class="col-lg-8">
                     <pre class="line-numbers"><code class="language-javascript">
-                        //Call HelloWorld 
-                        function HelloWorld() {
-                            alert("Hello World");
+                        function getValue() {
+                            document.getElementById("alert").classList.add("invisible");
+                        
+                            let userString = document.getElementById("userString").value;
+                        
+                            let returnObj = checkValue(userString);
+                        
+                            displayResult(returnObj);
+                        }
+                        
+                        function checkValue(userString) {
+                        
+                            userString = userString.toLowerCase();
+                        
+                            let regex = /[^a-z0-9]/gi;
+                            userString = userString.replace(regex, "");
+                        
+                            let reversedString = [];
+                            let returnObj = {};
+                        
+                            for (let i = userString.length - 1; i >= 0; i--) {
+                                reversedString += userString[i];
+                            }
+                        
+                            if (reversedString == userString) {
+                                returnObj.msg = "Well done! You've entered a palindrome!"
+                            } else {
+                                returnObj.msg = "Sorry! You did not enter a palindrome!"
+                            }
+                            returnObj.reversed = reversedString;
+                        
+                            return returnObj;
+                        
+                        }
+                        
+                        function displayResult(returnObj) {
+                            document.getElementById("alertHeader").innerHTML = returnObj.msg;
+                            document.getElementById("message").innerHTML = `Your phrase reversed is: ${returnObj.reversed}`;
+                            document.getElementById("alert").classList.remove("invisible");
                         }
                     </code>
                     </pre>
                 </div>
                 <div class="col-lg-4">
-                    <p>The Code is structed in one function.</p>
-                    <h5>Hello World</h5>
-                    <p>Hello World is a function that displays an alert with a message of "Hello World"</p>
+                    <p>The Code is structed in three function.</p>
+                    <h5>getValue()</h5>
+                    <p>This function retrieves the user’s input from the document and stores it in the userString
+                        variable. It creates an object that will be used to store both a message as well as the results
+                        of reversing the userString. Finally, it passes the returnObj to the displayResults() function.
+                    </p>
+                    <h5>checkValue()</h5>
+                    <p>This function receives the userString variable and utilizes the toLowerCase() method to remove
+                        any capitalization. A regular expression is constructed for patterns of only lowercase a – z and
+                        0 -9. A reversedString array and returnObj are declared. The userString is iterated beginning at
+                        the end of the string to the beginning and added to the reversedString array. Depending on
+                        whether the value of both the userString and reversedString are the same, an appropriate message
+                        is added to the returnObj as a property. The reversedString is also added as a property of the
+                        object and returnObj is returned.</p>
+                    <h5>displayResults()</h5>
+                    <p>This function receives the returnObj and replaces the content the document with the id
+                        “alertHeader” with the contents of the msg property of the object. The contents of the message
+                        element is also replaced and the class attribute of “invisible” is removed from the “alert”
+                        element; allowing it to be displayed on the screen.</p>
                 </div>
             </div>
         </div>
